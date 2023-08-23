@@ -266,6 +266,10 @@ li:hover {
 	transition: 0.3s ease;
 }
 
+#filtres button:nth-child(-n+2) {
+	padding: 10px 30px;
+}
+
 #filtres button:hover {
 	background: #1D6154;
 	color: white;
