@@ -1,11 +1,13 @@
-// Constante
+// ------------- Constante & Variable --------------
 
 const url = 'http://localhost:5678/api/';
 
 let gallery = [];
+let categories = [];
 const elemGallery = document.querySelector(".gallery");
-const filtres = document.querySelector('.filtres');
+const filtres = document.getElementById('filtres');
 
+// ------------- Affichage des projets --------------
 
 fetch(url + "works", {
     method: "GET"
@@ -29,8 +31,26 @@ function displayGallery() {
     }
 }
 
-// function init() {
+// ------------- Affichage des catégories --------------
 
-// }
+fetch(url + "categories", {
+    method: "GET"
+}).then((result) => {
+    return result.json()
+}).then(data => {
+    categories = data;
+    displayCategories()
+})
 
-// init();
+function displayCategories() {
+    let btn = document.createElement('button')
+    btn.textContent = 'Tous'
+    btn.setAttribute('data-id', 0)
+    filtres.appendChild(btn)
+    for (let i = 0; i < categories.length; i++) {
+        btn = document.createElement('button')
+        btn.textContent = categories[i].name
+        btn.setAttribute('data-id', categories[i].id)
+        filtres.appendChild(btn)
+    }
+}
