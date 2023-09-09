@@ -165,6 +165,14 @@ h1 {
 
 }
 
+header a {
+	text-decoration: none;
+}
+
+header a h1:hover {
+	cursor: pointer;
+}
+
 h1>span {
 	font-family: 'Work Sans';
 	font-size: 10px;
@@ -191,7 +199,7 @@ nav ul {
 
 nav li {
 	font-size: 1.2em;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 nav li i {
@@ -338,6 +346,55 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.login {
+	width: 35%;
+	margin: 17% auto;
+}
+
+.login>* {
+	text-align: center;
+
+}
+
+.login h2 {
+	margin-bottom: 20px;
+}
+
+.login p {
+	font-size: 16.5px;
+}
+
+.login form {
+	text-align: left;
+	margin-top: 0px;
+	display: flex;
+	flex-direction: column;
+}
+
+.login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login label {
+	margin: 2em 0 1em 0;
+	font-weight: 600;
+	color: #555554;
+}
+
+.login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login form a {
+	margin: auto;
+	color: #555554;
+	font-weight: 600;
+}
+
 input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -347,15 +404,16 @@ input[type="submit"] {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
+	cursor: pointer;
 }
 
-footer nav ul {
+footer ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em;
+	margin: 2em 0;
 }
 
-footer nav ul li {
+footer ul li {
 	font-weight: 400;
 	font-size: 15px;
 }
