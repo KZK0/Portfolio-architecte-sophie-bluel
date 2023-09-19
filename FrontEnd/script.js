@@ -7,7 +7,6 @@ let galleryFilter = [];
 let categories = [];
 const elemGallery = document.querySelector(".gallery");
 const filtres = document.getElementById('filtres');
-const login = document.getElementById('login');
 
 login.addEventListener('click', ()=>{
 
