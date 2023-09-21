@@ -9,7 +9,7 @@ form.addEventListener('submit', (e)=>{
     const user = {};
     user.email = document.getElementById('email').value;
     user.password = document.getElementById('password').value;
-    console.log(user);
+   
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers:{
@@ -18,19 +18,39 @@ form.addEventListener('submit', (e)=>{
         },
         body: JSON.stringify(user)       
     }).then((result) => {
-        console.log(result);
-        if(result.status != 200){
-           console.log(result)
-        }
         return result.json()
     }).then(data => {       
-        localStorage.setItem('token',data.token)
-        window.location.href = 'indexOut.html'
+       console.log(data)
+        if(data.message){
+            let elm =  document.querySelector('.error');
+            elm.innerHTML = data.message;
+            elm.style.display = 'flex';  
+        }else{
+            localStorage.setItem('token',data.token)
+            window.location.href = 'indexOut.html'
+        }
+       
+       
     })
 
 
 })
 
+
+document.getElementById('email').addEventListener('focus',() =>{
+    let elm =  document.querySelector('.error');
+   
+    elm.style.display = 'none';
+
+})
+document.getElementById('password').addEventListener('focus',() =>{
+    let elm =  document.querySelector('.error');
+   
+    elm.style.display = 'none';
+
+})
+
+document.getElementById('login').style.fontWeight = "900";
 
 
 

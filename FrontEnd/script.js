@@ -8,11 +8,12 @@ let categories = [];
 const elemGallery = document.querySelector(".gallery");
 const filtres = document.getElementById('filtres');
 
+// const isConnected = localStorage.getItem('token') ? true : false;
+
 login.addEventListener('click', ()=>{
 
     // window.open('tonurl','_blank')
     window.location.href='./login.html';
-    login.style.fontWeight = '600';
 })
 
 // ------------- Affichage des projets --------------
@@ -42,6 +43,7 @@ function displayGallery(pgallery) {
 }
 
 // ------------- Affichage des catégories --------------
+// if(!isConnected){
 fetch(url + "categories", {
     method: "GET"
 }).then((result) => {
@@ -50,6 +52,7 @@ fetch(url + "categories", {
     categories = data;
     displayCategories()
 })
+// }
 
 function displayCategories() {
     let btn = document.createElement('button')
@@ -70,6 +73,7 @@ function displayCategories() {
         filtres.appendChild(btn)
     }
 }
+
 const sortProjects = (e) => {
      galleryFilter = gallery.filter(item => item.categoryId == e.target.getAttribute('data-id'));
      if(galleryFilter.length == 0){       
@@ -78,3 +82,7 @@ const sortProjects = (e) => {
         displayGallery(galleryFilter);
      }    
 }
+
+
+
+// goModify

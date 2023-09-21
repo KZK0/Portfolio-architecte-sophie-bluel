@@ -12,12 +12,30 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <div class="gestion">
-        <button>
-            <i class="fa-regular fa-pen-to-square fa-lg"></i>
-            Mode édition
-        </button>
-    </div>
+	<div class="gestion">
+		<button>
+			<i class="fa-regular fa-pen-to-square fa-lg"></i>
+			Mode édition
+		</button>
+	</div>
+	<div class="modal">
+		<div class="bloc-modal">
+			<nav>
+				<i class="fa-solid fa-xmark fa-xl"></i>
+			</nav>
+			<h3>Galerie Photo</h3>
+			<div class="bloc-project-modal">
+				<div class="project-modal">
+					<button>
+						<i class="fa-solid fa-trash-can fa-sm"></i>
+					</button>
+				</div>
+			</div>
+			<div class="bottom-bloc-modal">
+				<button>Ajouter une photo</button>
+			</div>
+		</div>
+	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -46,7 +64,7 @@
 	<section id="portfolio">
         <div class="MyProject">
             <h2>Mes Projets</h2>
-            <button>
+            <button class="goModify">
                 <i class="fa-regular fa-pen-to-square fa-sm"></i>
                 modifier
             </button>

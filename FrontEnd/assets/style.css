@@ -221,6 +221,10 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: absolute;
+	z-index: 15;
+	top: 0;
+	left: 0;
 }
 
 .gestion button {
@@ -409,6 +413,11 @@ li:hover {
 	outline: 3px solid #B1663C;
 }
 
+
+.error{
+	color:red;
+	display: none;
+}
 .login {
 	max-width: 450px;
 	margin: 10% auto;
@@ -499,4 +508,128 @@ footer ul {
 footer ul li {
 	font-weight: 400;
 	font-size: 15px;
+}
+
+/* ----------------- Modal ---------------- */
+
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100dvh;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	background-color: rgba(112, 112, 112, 0.7);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.bloc-modal {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 50px;
+	width: 32%;
+	height: 650px;
+	background: white;
+	border-radius: 20px;
+}
+
+.bloc-modal h3 {
+	color: black;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	margin: 40px 0;
+	font-size: 2.5em;
+}
+
+.bloc-modal nav {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.bloc-modal nav i {
+	color: black;
+	transition: 0.3s ease;
+}
+
+.bloc-modal nav i:hover {
+	cursor: pointer;
+	filter: opacity(0.5);
+}
+
+.bloc-project-modal {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 85%;
+	height: 400px;
+	margin: 0 auto;
+}
+
+.project-modal {
+	position: relative;
+	background-image: url(./images/abajour-tahina.png);
+	background-position: center;
+	background-size: cover;
+	width: 18%;
+	height: 140px;
+}
+
+.project-modal button {
+	position: absolute;
+	background: black;
+	border: none;
+	border-radius: 5px;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	transition: 0.3s ease;
+}
+
+.project-modal button:hover {
+	cursor: pointer;
+	filter: brightness(1.3);
+}
+
+.project-modal button i {
+	color: white;
+	font-weight: 500;
+	margin-left: -1px;
+}
+
+.bottom-bloc-modal {
+	border-top: 2px solid rgba(201, 201, 201, 0.822);
+	width: 90%;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.bottom-bloc-modal button {
+	width: 300px;
+	padding: 10px 15px;
+	border-radius: 25px;
+	color: white;
+	background: #1D6154;
+	border: none;
+	font-family: 'syne';
+	font-size: 16px;
+	font-weight: 600;
+	margin-top: 50px;
+	transition: 0.3s ease;
+}
+
+.bottom-bloc-modal button:hover {
+	cursor: pointer;
+	filter: brightness(1.2);
 }
