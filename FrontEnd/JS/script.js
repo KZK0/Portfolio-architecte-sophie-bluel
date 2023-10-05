@@ -7,14 +7,18 @@ let galleryFilter = [];
 let categories = [];
 const elemGallery = document.querySelector(".gallery");
 const filtres = document.getElementById('filtres');
-const conteneurGalleryModal = document.querySelector('.bloc-project-modal')
+const conteneurGalleryModal = document.querySelector('.bloc-project-modal');
+const SecondConteneurGalleryModal = document.querySelector('.bloc-project-modal-two');
 
-const isConnected = localStorage.getItem('token') ? true : false;
+const isConnected = localStorage.getItem('isConnected') == 'true' ? true : false;
+
 
 login.addEventListener('click', () => {
 
     // window.open('tonurl','_blank')
-    window.location.href = './login.html';
+    localStorage.removeItem('token')
+    localStorage.setItem('isConnected', false)
+    window.location.href = '../pages/login.html';
 })
 
 // ------------- Affichage des projets --------------
@@ -31,23 +35,26 @@ fetch(url + "works", {
         displayGallery(gallery, elemGallery)
         displayGallery(gallery, conteneurGalleryModal)
     } else {
-        // console.log("je ne suis pas connecté")
+
+
         displayGallery(gallery, elemGallery)
     }
 })
 
 function displayGallery(pgallery, elm) {
+
     elm.innerHTML = '';
     for (let i = 0; i < pgallery.length; i++) {
         let fig = document.createElement('figure');
         let img = document.createElement('img');
+        img.src = pgallery[i].imageUrl;
+        fig.appendChild(img)
         if (!isConnected) {
             let caption = document.createElement('figcaption');
             caption.textContent = pgallery[i].title;
             fig.appendChild(caption)
         }
-        img.src = pgallery[i].imageUrl;
-        fig.appendChild(img)
+
         elm.appendChild(fig);
     }
 }
@@ -91,50 +98,99 @@ function displayCategories() {
 const sortProjects = (e) => {
     galleryFilter = gallery.filter(item => item.categoryId == e.target.getAttribute('data-id'));
     if (galleryFilter.length == 0) {
-        displayGallery(gallery);
+        displayGallery(gallery, elemGallery);
     } else {
-        displayGallery(galleryFilter);
+        displayGallery(galleryFilter, elemGallery);
     }
 }
 
 
 // ---------------- Ouverture / Fermeture de la modal ------------------
-// faire se code uniquement si tu es connecté, sinon ça va buguer
+
 const openModal = document.querySelector('.goModify');
 const closeModal = document.querySelector('.modal');
 const crossModal = document.getElementById('crossModal')
-// const conteneurGalleryModal = document.querySelector('.bloc-project-modal')
-// loadGallerieModal();
 
 
-// function loadGallerieModal() {
-//     conteneurGalleryModal.innerHTML = '';
+if (isConnected) {
 
-//     for (let i = 0; i < gallery.length; i++) {
-//         let fig = document.createElement('figure');
-//         let img = document.createElement('img');
-//         let caption = document.createElement('figcaption');
-//         img.src = gallery[i].imageUrl;
-//         caption.textContent = gallery[i].title;
-//         fig.appendChild(img)
-//         fig.appendChild(caption)
-//         conteneurGalleryModal.appendChild(fig);
-//     }
-
-// }
-
-crossModal.addEventListener('click', () => {
-    closeModale();
-})
-openModal.addEventListener('click', () => {
-    document.querySelector('.modal').style.display = 'flex';
-})
-
-closeModal.addEventListener('click', (event) => {
-    if (event.target == closeModal)
+    crossModal.addEventListener('click', () => {
         closeModale();
-})
+    })
+    openModal.addEventListener('click', () => {
+        document.querySelector('.modal').style.display = 'flex';
+    })
 
-function closeModale() {
-    document.querySelector('.modal').style.display = 'none';
+    closeModal.addEventListener('click', (event) => {
+        if (event.target == closeModal)
+            closeModale();
+    })
+
+    function closeModale() {
+        document.querySelector('.modal').style.display = 'none';
+    }
+
+    // ---------------- Ajouter un projet / Supprimer un projet ------------------
+
+    const addProject = document.getElementById('addProject');
+
+    addProject.addEventListener('click', (event) => {
+        conteneurGalleryModal.innerHTML = '';
+
+        conteneurGalleryModal.classList.remove('bloc-project-modal');
+        conteneurGalleryModal.classList.add('bloc-project-modal-two');
+
+        const imgDiv = document.createElement('div');
+        imgDiv.classList.add('conteneurImg');
+        // Création du conteneur de l'image
+
+        const img = document.createElement('img');
+        img.src = '../assets/icons/add Picture.svg'
+        // Création de l'image à l'intérieur du conteneur
+
+        const AddPicture = document.createElement('button');
+        AddPicture.textContent = '+ Ajouter photo';
+        AddPicture.classList.add('AddPicModal');
+        AddPicture.classList.add('picModalIn');
+        // Création du bouton permettant d'ajouter une photo
+
+        AddPicture.addEventListener('mouseenter', () => {
+            img.classList.add('picModalIn');
+            AddPicture.classList.add('picModalIn');
+        })
+        AddPicture.addEventListener('mouseout', () => {
+            img.classList.remove('picModalIn');
+            AddPicture.classList.remove('picModalIn');
+        })
+        // Effet d'opacity sur le bouton et l'image
+
+        const UnderButtonText = document.createElement('p');
+        UnderButtonText.textContent = 'JPG, PNG: 4mo max';
+        UnderButtonText.classList.add('UnderButton');
+        // Création du paragraphe sous le bouton d'ajout de photo
+
+        const TitreProjet = document.createElement('form');
+        TitreProjet.setAttribute("method", "post");
+
+
+        imgDiv.appendChild(img)
+        imgDiv.appendChild(AddPicture)
+        imgDiv.appendChild(UnderButtonText)
+        conteneurGalleryModal.appendChild(imgDiv)
+        conteneurImg.appendChild(AddPicture)
+        conteneurImg.appendChild(UnderButtonText)
+
+        //TODO : ici ajouter la fleche de retour, ne pas oublier de mettre l'event sur la fleche
+        const contenerArrow = document.querySelector('#crossModal');
+        const arrow = document.createElement('i');
+        arrow.classList.add('fa-solid')
+        arrow.classList.add('fa-arrow-left')
+        arrow.classList.add('fa-xl')
+        contenerArrow.appendChild(arrow)
+
+        arrow.addEventListener('click', () => {
+            console.log('retour')
+        })
+
+    })
 }

@@ -19,11 +19,12 @@ form.addEventListener('submit', async (e) => {
         body: JSON.stringify(user)
     }).then(async (result) => {
         if (200 != result.status) {
-            throw new Error('ne peut pas se connecter')
+            throw new Error('Adresse email et/ou mot de passe invalide')
         }
         return await result.json()
     }).then(data => {
         localStorage.setItem('token', data.token)
+        localStorage.setItem('isConnected', true)
         window.location.href = 'indexOut.html'
     }).catch((error) => {
         let elm = document.querySelector('.error');

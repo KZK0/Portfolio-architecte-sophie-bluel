@@ -150,6 +150,7 @@ header {
 	justify-content: space-between;
 	max-width: 1140px;
 	margin: 50px auto;
+	user-select: none;
 }
 
 section {
@@ -225,6 +226,10 @@ li:hover {
 	z-index: 15;
 	top: 0;
 	left: 0;
+}
+
+.gestion-gap {
+	margin: 100px auto;
 }
 
 .bloc-gestion {
@@ -573,6 +578,13 @@ footer ul li {
 	width: 85%;
 	height: 400px;
 	margin: 0 auto;
+	overflow-y: scroll;
+	align-items: center;
+}
+
+.bloc-project-modal figure img {
+	height: 120px;
+	width: 90px;
 }
 
 .project-modal {
@@ -609,7 +621,7 @@ footer ul li {
 
 .bottom-bloc-modal {
 	border-top: 2px solid rgba(201, 201, 201, 0.822);
-	width: 90%;
+	width: 85%;
 	height: 100px;
 	display: flex;
 	justify-content: center;
@@ -634,4 +646,53 @@ footer ul li {
 .bottom-bloc-modal button:hover {
 	cursor: pointer;
 	filter: brightness(1.2);
+}
+
+.conteneurImg {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	background-color: rgb(232, 241, 246);
+}
+
+.conteneurImg img {
+	margin-top: 15px;
+	margin-bottom: 10px;
+	width: 25%;
+	height: 100px;
+	transition: 0.4s ease;
+}
+
+.AddPicModal {
+	width: 200px;
+	padding: 12px 0;
+	border-radius: 100px;
+	border: none;
+	color: #3b7ca1;
+	background: #B9C5CC;
+	font-size: 1.3em;
+	font-weight: 500;
+	transition: 0.4s ease;
+	user-select: none;
+}
+
+.picModalIn {
+	filter: brightness(0.9);
+	cursor: pointer;
+}
+
+.UnderButton {
+	margin: 10px 0;
+}
+
+.bloc-project-modal-two {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 85%;
+	height: 400px;
+	margin: 0 auto;
+	align-items: start;
 }
