@@ -133,12 +133,21 @@ if (isConnected) {
     // ---------------- Ajouter un projet / Supprimer un projet ------------------
 
     const addProject = document.getElementById('addProject');
+    const TitleModal = document.querySelector('.Title-project-modal');
+    const ValidButton = document.querySelector('.bottom-bloc-modal');
 
     addProject.addEventListener('click', (event) => {
+        TitleModal.innerHTML = '';
         conteneurGalleryModal.innerHTML = '';
+        ValidButton.innerHTML = '';
+        // Permet de vider le contenu de la modal au clique pour faire la seconde page 
 
         conteneurGalleryModal.classList.remove('bloc-project-modal');
         conteneurGalleryModal.classList.add('bloc-project-modal-two');
+        // Changement de class au clique d'ajout photo 
+
+        TitleModal.textContent = 'Ajout photo';
+        // Création du Titre de la modal
 
         const imgDiv = document.createElement('div');
         imgDiv.classList.add('conteneurImg');
@@ -162,23 +171,61 @@ if (isConnected) {
             img.classList.remove('picModalIn');
             AddPicture.classList.remove('picModalIn');
         })
-        // Effet d'opacity sur le bouton et l'image
+        // Effet hover d'opacity sur le bouton et l'image
 
         const UnderButtonText = document.createElement('p');
         UnderButtonText.textContent = 'JPG, PNG: 4mo max';
         UnderButtonText.classList.add('UnderButton');
         // Création du paragraphe sous le bouton d'ajout de photo
 
+        // ------------------ Formulaire ajout projet modal ----------------------- 
+
         const TitreProjet = document.createElement('form');
         TitreProjet.setAttribute("method", "post");
+        TitreProjet.classList.add('formModal');
 
+        const LabelTitleModal = document.createElement('label');
+        LabelTitleModal.textContent = 'Titre';
+        LabelTitleModal.setAttribute('name', 'TitreModal');
+        LabelTitleModal.classList.add('LabelModal');
 
+        const InputModal = document.createElement('input');
+        InputModal.setAttribute('type', 'text');
+        InputModal.setAttribute('for', 'TitreModal');
+        InputModal.setAttribute('maxlength', '25');
+        InputModal.classList.add('inputModal');
+
+        const LabelSelectCategorie = document.createElement('label');
+        LabelSelectCategorie.textContent = 'Catégorie';
+        LabelSelectCategorie.setAttribute('name', 'LabelCategorie');
+        LabelSelectCategorie.classList.add('LabelModal');
+
+        const SelectCategorieModal = document.createElement('select');
+        SelectCategorieModal.setAttribute('for', 'LabelCategorie');
+        SelectCategorieModal.setAttribute('name', 'Selection');
+        SelectCategorieModal.classList.add('inputModal');
+
+        // const CategorieModal = document.createElement('option')
+        // CategorieModal.textContent = 'Tous';
+        // CategorieModal.setAttribute('data-id', '0');
+        // CategorieModal.setAttribute('for', 'Selection');
+
+        // ----------------------------------------------------------------------------- 
+        const ProjectButton = document.createElement('button');
+        ProjectButton.textContent = 'Valider';
+        ProjectButton.classList.add('ValidateButton');
+
+        conteneurGalleryModal.appendChild(TitleModal)
+        conteneurGalleryModal.appendChild(imgDiv)
+        conteneurGalleryModal.appendChild(TitreProjet)
         imgDiv.appendChild(img)
         imgDiv.appendChild(AddPicture)
         imgDiv.appendChild(UnderButtonText)
-        conteneurGalleryModal.appendChild(imgDiv)
-        conteneurImg.appendChild(AddPicture)
-        conteneurImg.appendChild(UnderButtonText)
+        TitreProjet.appendChild(LabelTitleModal)
+        TitreProjet.appendChild(InputModal)
+        TitreProjet.appendChild(LabelSelectCategorie)
+        TitreProjet.appendChild(SelectCategorieModal)
+        ValidButton.appendChild(ProjectButton)
 
         //TODO : ici ajouter la fleche de retour, ne pas oublier de mettre l'event sur la fleche
         const contenerArrow = document.querySelector('#crossModal');
@@ -189,7 +236,8 @@ if (isConnected) {
         contenerArrow.appendChild(arrow)
 
         arrow.addEventListener('click', () => {
-            console.log('retour')
+            conteneurGalleryModal.classList.remove('bloc-project-modal-two');
+            conteneurGalleryModal.classList.add('bloc-project-modal');
         })
 
     })
