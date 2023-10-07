@@ -549,8 +549,8 @@ footer ul li {
 	color: black;
 	display: flex;
 	justify-content: center;
-	margin: 30px auto;
-	margin-top: 20px;
+	margin: 15px auto;
+	margin-top: 10px;
 	font-size: 2.5em;
 }
 
@@ -575,12 +575,10 @@ footer ul li {
 .bloc-project-modal {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 	align-items: center;
-	gap: 10px;
-	width: 85%;
-	margin: 0 auto;
-	margin-bottom: 15px;
+	gap: 25px 13px;
+	width: 78%;
+	margin: 30px auto;
 	overflow-y: scroll;
 }
 
@@ -614,7 +612,7 @@ footer ul li {
 
 .bottom-bloc-modal {
 	border-top: 2px solid rgba(201, 201, 201, 0.822);
-	width: 85%;
+	width: 78%;
 	height: 100px;
 	display: flex;
 	justify-content: center;
@@ -703,7 +701,7 @@ footer ul li {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	width: 85%;
+	width: 78%;
 	margin: 0 auto;
 	align-items: start;
 }
@@ -716,7 +714,7 @@ footer ul li {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 }
 
 .LabelModal {

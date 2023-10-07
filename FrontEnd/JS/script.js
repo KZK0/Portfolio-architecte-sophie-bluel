@@ -205,10 +205,13 @@ if (isConnected) {
         SelectCategorieModal.setAttribute('name', 'Selection');
         SelectCategorieModal.classList.add('inputModal');
 
-        // const CategorieModal = document.createElement('option')
-        // CategorieModal.textContent = 'Tous';
-        // CategorieModal.setAttribute('data-id', '0');
-        // CategorieModal.setAttribute('for', 'Selection');
+        for (let i = 0; i < categories.length; i++) {
+            CategorieModal = document.createElement('option');
+            CategorieModal.textContent = categories[i].name;
+            CategorieModal.setAttribute('data-id', categories[i].id);
+            CategorieModal.setAttribute('for', 'Selection');
+        }
+
 
         // ----------------------------------------------------------------------------- 
         const ProjectButton = document.createElement('button');
@@ -225,6 +228,7 @@ if (isConnected) {
         TitreProjet.appendChild(InputModal)
         TitreProjet.appendChild(LabelSelectCategorie)
         TitreProjet.appendChild(SelectCategorieModal)
+        SelectCategorieModal.appendChild(CategorieModal)
         ValidButton.appendChild(ProjectButton)
 
         //TODO : ici ajouter la fleche de retour, ne pas oublier de mettre l'event sur la fleche
