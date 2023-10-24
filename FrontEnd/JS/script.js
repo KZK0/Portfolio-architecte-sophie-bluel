@@ -1,4 +1,6 @@
+// ==============================================================================
 // ------------- Constante & Variable --------------
+// ==============================================================================
 
 const url = 'http://localhost:5678/api/';
 
@@ -16,12 +18,14 @@ const isConnected = localStorage.getItem('isConnected') == 'true' ? true : false
 login.addEventListener('click', () => {
 
     // window.open('tonurl','_blank')
-    localStorage.removeItem('token')
-    localStorage.setItem('isConnected', false)
+    localStorage.removeItem('token');
+    localStorage.setItem('isConnected', false);
     window.location.href = '../pages/login.html';
 })
 
+// ==============================================================================
 // ------------- Affichage des projets --------------
+// ==============================================================================
 
 fetch(url + "works", {
     method: "GET"
@@ -59,7 +63,6 @@ function displayGallery(pgallery, elm) {
             bin.classList.add('fa-trash-can');
             bin.classList.add('fa-sm');
 
-
             binbackground.addEventListener('click', () => {
                 // TODO faire la suppression côté serveur puis domHTML
 
@@ -73,21 +76,10 @@ function displayGallery(pgallery, elm) {
     }
 }
 
-function displayBin() {
-    for (let i = 0; i < gallery.length; i++) {
-        const binbackground = document.createElement('button');
-        const bin = document.createElement('i');
-        binbackground.classList.add('.project-modal');
-        bin.classList.add('fa-solid');
-        bin.classList.add('fa-trash-can');
-        bin.classList.add('fa-sm');
 
-        img.appendChild(binbackground);
-        binbackground.appendChild(bin);
-    }
-}
-
+// ==============================================================================
 // ------------- Affichage des catégories --------------
+// ==============================================================================
 
 // if (!isConnected) {
 fetch(url + "categories", {
@@ -132,10 +124,12 @@ const sortProjects = (e) => {
     }
 }
 
-
+// ==============================================================================
 // ---------------- Ouverture / Fermeture de la modal ------------------
+// ==============================================================================
 
 const openModal = document.querySelector('.goModify');
+const IconOpenModal = document.querySelector('.ModifyIcon');
 const closeModal = document.querySelector('.modal');
 const crossModal = document.getElementById('crossModal')
 
@@ -145,6 +139,7 @@ if (isConnected) {
     // crossModal.addEventListener('click', () => {
     //     closeModale();
     // })
+
     openModal.addEventListener('click', () => {
         document.querySelector('.modal').style.display = 'flex';
     })
@@ -158,7 +153,9 @@ if (isConnected) {
         document.querySelector('.modal').style.display = 'none';
     }
 
+    // ==============================================================================
     // ---------------- Ajouter un projet / Supprimer un projet ------------------
+    // ==============================================================================
 
     const addProject = document.getElementById('addProject');
     const TitleModal = document.querySelector('.Title-project-modal');
@@ -180,8 +177,8 @@ if (isConnected) {
         imgDiv.classList.add('conteneurImg');
         // Création du conteneur de l'image
 
-        const img = document.createElement('img');
-        img.src = '../assets/icons/add Picture.svg'
+        const imgModal = document.createElement('img');
+        imgModal.src = '../assets/icons/add Picture.svg'
         // Création de l'image à l'intérieur du conteneur
 
         const labelInput = document.createElement('label')
@@ -194,38 +191,29 @@ if (isConnected) {
         AddPicture.setAttribute('name', 'AddPicModal');
         AddPicture.id = 'AddPicModal';
         AddPicture.style.display = 'none'
-        // AddPicture.textContent = '+ Ajouter photo';
-        AddPicture.classList.add('AddPicModal');
-        AddPicture.classList.add('picModalIn');
         // Création du bouton permettant d'ajouter une photo
+        let imgUpload = null;
         AddPicture.addEventListener('change', (data) => {
             AddPicture.style.display = 'none';
             UnderButtonText.style.display = 'none';
+            labelInput.style.display = 'none';
             imgDiv.classList.replace('conteneurImg', 'conteneurImgScnd');
             let reader = new FileReader()
             reader.onload = (e) => {
-                img.src = e.target.result;
+                imgModal.src = e.target.result;
             }
-
+            imgUpload = data.target.files[0];
             reader.readAsDataURL(data.target.files[0])
         })
-
-        AddPicture.addEventListener('mouseenter', () => {
-            img.classList.add('picModalIn');
-            AddPicture.classList.add('picModalIn');
-        })
-        AddPicture.addEventListener('mouseout', () => {
-            img.classList.remove('picModalIn');
-            AddPicture.classList.remove('picModalIn');
-        })
-        // Effet hover d'opacity sur le bouton et l'image
 
         const UnderButtonText = document.createElement('p');
         UnderButtonText.textContent = 'JPG, PNG: 4mo max';
         UnderButtonText.classList.add('UnderButton');
         // Création du paragraphe sous le bouton d'ajout de photo
 
+        // ==============================================================================
         // ------------------ Formulaire ajout projet modal ----------------------- 
+        // ==============================================================================
 
         const TitreProjet = document.createElement('form');
         TitreProjet.classList.add('formModal');
@@ -233,11 +221,13 @@ if (isConnected) {
         const LabelTitleModal = document.createElement('label');
         LabelTitleModal.textContent = 'Titre';
         LabelTitleModal.setAttribute('name', 'TitreModal');
+
         LabelTitleModal.classList.add('LabelModal');
 
         const InputModal = document.createElement('input');
         InputModal.setAttribute('type', 'text');
         InputModal.setAttribute('for', 'TitreModal');
+        InputModal.setAttribute('id', 'TitreModal');
         InputModal.setAttribute('maxlength', '25');
         InputModal.classList.add('inputModal');
 
@@ -245,8 +235,10 @@ if (isConnected) {
 
             if (e.target.value.length > 0) {
                 ProjectButton.classList.replace('ValidateButton', 'ValidateButtonTwo');
+                ProjectButton.disabled = false;
             } else {
                 ProjectButton.classList.replace('ValidateButtonTwo', 'ValidateButton');
+                ProjectButton.disabled = true;
             }
         })
 
@@ -259,6 +251,7 @@ if (isConnected) {
         SelectCategorieModal.setAttribute('for', 'LabelCategorie');
         SelectCategorieModal.setAttribute('name', 'Selection');
         SelectCategorieModal.classList.add('inputModal');
+        SelectCategorieModal.setAttribute('id', 'Selection');
 
         for (let i = 0; i < categories.length; i++) {
             CategorieModal = document.createElement('option');
@@ -268,16 +261,46 @@ if (isConnected) {
             SelectCategorieModal.appendChild(CategorieModal)
         }
 
-
-        // ----------------------------------------------------------------------------- 
         const ProjectButton = document.createElement('button');
+        ValidButton.classList.replace('bottom-bloc-modal', 'bottom-bloc-modal-two');
         ProjectButton.textContent = 'Valider';
         ProjectButton.classList.add('ValidateButton');
+
+        ProjectButton.addEventListener('click', async () => {
+            // TODO faire l'ajout' côté serveur puis domHTML
+            const token = localStorage.getItem("token");
+            const formulaire = new FormData();
+            formulaire.append('id', 0);
+            formulaire.append('imageUrl', imgUpload);
+            formulaire.append('title', document.getElementById('TitreModal').value);
+            formulaire.append('categoryId', '0');
+
+
+
+            await fetch(url + "works", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    Authorization: "Bearer " + token
+                },
+                body: formulaire
+            }).then(async (result) => {
+                console.log(result)
+                return result.json()
+            }).then(data => {
+                console.log(data.message)
+                // AddPicture = data;
+                // InputModal = data;
+                // CategorieModal = data;
+            })
+        })
+
+        // ------------------------------------------------------------------------------------
 
         conteneurGalleryModal.appendChild(TitleModal)
         conteneurGalleryModal.appendChild(imgDiv)
         conteneurGalleryModal.appendChild(TitreProjet)
-        imgDiv.appendChild(img)
+        imgDiv.appendChild(imgModal)
         imgDiv.appendChild(labelInput)
         imgDiv.appendChild(AddPicture)
         imgDiv.appendChild(UnderButtonText)

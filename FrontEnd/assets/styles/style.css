@@ -576,15 +576,20 @@ footer ul li {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 18px 3px;
-	width: 83%;
+	gap: 30px 13px;
+	width: 78%;
 	margin: 25px auto;
 	overflow-y: scroll;
 }
 
+.bloc-project-modal figure {
+	width: 90px;
+	height: 120px;
+}
+
 .bloc-project-modal figure img {
 	height: 120px;
-	width: 90px;
+	width: 100%;
 }
 
 .project-modal {
@@ -593,8 +598,8 @@ footer ul li {
 	background: black;
 	border: none;
 	border-radius: 5px;
-	bottom: 100px;
-	right: 28px;
+	bottom: 117px;
+	right: -65px;
 	width: 20px;
 	height: 20px;
 	transition: 0.3s ease;
@@ -609,10 +614,20 @@ footer ul li {
 .project-modal i {
 	color: white;
 	font-weight: 500;
-	margin-left: -1px;
+	margin-left: -1.5px;
 }
 
 .bottom-bloc-modal {
+	border-top: 2px solid rgba(201, 201, 201, 0.822);
+	width: 78%;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.bottom-bloc-modal-two {
 	border-top: 2px solid rgba(201, 201, 201, 0.822);
 	width: 78%;
 	height: 100px;
@@ -713,6 +728,8 @@ footer ul li {
 }
 
 .AddPicModal {
+	display: flex;
+	justify-content: center;
 	width: 200px;
 	padding: 12px 0;
 	border-radius: 100px;
@@ -723,11 +740,11 @@ footer ul li {
 	font-weight: 500;
 	transition: 0.4s ease;
 	user-select: none;
+	cursor: pointer;
 }
 
-.picModalIn {
+.AddPicModal:hover {
 	filter: brightness(0.9);
-	cursor: pointer;
 }
 
 .UnderButton {
