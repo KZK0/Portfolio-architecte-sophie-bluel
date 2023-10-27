@@ -3,14 +3,15 @@
 // ==============================================================================
 
 const url = 'http://localhost:5678/api/';
+const token = localStorage.getItem("token");
 
 let gallery = [];
 let galleryFilter = [];
 let categories = [];
 const elemGallery = document.querySelector(".gallery");
 const filtres = document.getElementById('filtres');
+const BlocModal = document.querySelector('.bloc-modal');
 const conteneurGalleryModal = document.querySelector('.bloc-project-modal');
-const SecondConteneurGalleryModal = document.querySelector('.bloc-project-modal-two');
 
 const isConnected = localStorage.getItem('isConnected') == 'true' ? true : false;
 
@@ -22,6 +23,17 @@ login.addEventListener('click', () => {
     localStorage.setItem('isConnected', false);
     window.location.href = '../pages/login.html';
 })
+
+const ScrollViewProject = document.getElementById('ViewProject');
+ScrollViewProject.addEventListener('click', () => {
+    window.location.href = '#portfolio';
+})
+
+const ScrollViewContact = document.getElementById('ViewContact');
+ScrollViewContact.addEventListener('click', () => {
+    window.location.href = '#contact';
+})
+
 
 // ==============================================================================
 // ------------- Affichage des projets --------------
@@ -62,10 +74,25 @@ function displayGallery(pgallery, elm) {
             bin.classList.add('fa-solid');
             bin.classList.add('fa-trash-can');
             bin.classList.add('fa-sm');
+            bin.setAttribute('data-id', pgallery[i].id)
 
-            binbackground.addEventListener('click', () => {
+            binbackground.addEventListener('click', async (e) => {
                 // TODO faire la suppression côté serveur puis domHTML
+                let idGallerie = e.target.getAttribute('data-id');
 
+                await fetch(url + "works/" + idGallerie, {
+                    method: "DELETE",
+                    headers: {
+                        'Accept': '*/*',
+                        Authorization: "Bearer " + token
+                    }
+
+                }).then((result) => {
+                    console.log(result)
+                    result.json()
+                }).then(data => {
+                    window.location.reload()
+                })
             })
 
             binbackground.appendChild(bin)
@@ -131,14 +158,15 @@ const sortProjects = (e) => {
 const openModal = document.querySelector('.goModify');
 const IconOpenModal = document.querySelector('.ModifyIcon');
 const closeModal = document.querySelector('.modal');
-const crossModal = document.getElementById('crossModal')
+const navModal = document.getElementById('NavModal');
+const crossModal = document.getElementById('Xmark');
 
 
 if (isConnected) {
 
-    // crossModal.addEventListener('click', () => {
-    //     closeModale();
-    // })
+    crossModal.addEventListener('click', () => {
+        closeModale();
+    })
 
     openModal.addEventListener('click', () => {
         document.querySelector('.modal').style.display = 'flex';
@@ -160,6 +188,7 @@ if (isConnected) {
     const addProject = document.getElementById('addProject');
     const TitleModal = document.querySelector('.Title-project-modal');
     const ValidButton = document.querySelector('.bottom-bloc-modal');
+
 
     addProject.addEventListener('click', (event) => {
         TitleModal.innerHTML = '';
@@ -268,30 +297,27 @@ if (isConnected) {
 
         ProjectButton.addEventListener('click', async () => {
             // TODO faire l'ajout' côté serveur puis domHTML
-            const token = localStorage.getItem("token");
             const formulaire = new FormData();
             formulaire.append('id', 0);
-            formulaire.append('imageUrl', imgUpload);
+            formulaire.append('image', imgUpload);
             formulaire.append('title', document.getElementById('TitreModal').value);
-            formulaire.append('categoryId', '0');
+            formulaire.append('category', document.getElementById('Selection').options[document.getElementById('Selection').selectedIndex].getAttribute('data-id'));
 
 
 
             await fetch(url + "works", {
                 method: "POST",
+                body: formulaire,
                 headers: {
                     'Accept': 'application/json',
                     Authorization: "Bearer " + token
-                },
-                body: formulaire
+                }
+
             }).then(async (result) => {
                 console.log(result)
                 return result.json()
             }).then(data => {
-                console.log(data.message)
-                // AddPicture = data;
-                // InputModal = data;
-                // CategorieModal = data;
+                window.location.reload()
             })
         })
 
@@ -311,7 +337,7 @@ if (isConnected) {
         ValidButton.appendChild(ProjectButton)
 
         //TODO : ici ajouter la fleche de retour, ne pas oublier de mettre l'event sur la fleche
-        const contenerArrow = document.querySelector('#crossModal');
+        const contenerArrow = document.querySelector('#NavModal');
         const arrow = document.createElement('i');
         arrow.classList.add('fa-solid')
         arrow.classList.add('fa-arrow-left')
@@ -320,10 +346,23 @@ if (isConnected) {
 
         arrow.addEventListener('click', () => {
             conteneurGalleryModal.classList.replace('bloc-project-modal-two', 'bloc-project-modal');
-            contenerArrow.innerHTML = '';
+            ValidButton.classList.replace('bottom-bloc-modal-two', 'bottom-bloc-modal');
+            ValidButton.innerHTML = '';
+
+            arrow.style.display = 'none';
+            TitleModal.textContent = 'Galerie Photo';
+
+            const BoutonAjoutRetour = document.createElement('button');
+            BoutonAjoutRetour.textContent = 'Ajouter une photo';
+            BoutonAjoutRetour.classList.add('#addProject');
+
+
+            BlocModal.appendChild(TitleModal)
+            ValidButton.appendChild(BoutonAjoutRetour)
 
             displayGallery(gallery, conteneurGalleryModal)
         })
 
     })
+
 }

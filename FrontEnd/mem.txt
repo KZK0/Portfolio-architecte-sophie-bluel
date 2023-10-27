@@ -1,6 +1,1 @@
-- Faire le FETCH pour ajouter un projet
-- Faire le FETCH pour supprimer un projet
-
 - Faire le retour de page dans la modal
-- Réactiver la croix pour fermer la modal
-- Faire la redirection de la nav menu
