@@ -52,4 +52,14 @@ document.getElementById('password').addEventListener('focus', () => {
 document.getElementById('login').style.fontWeight = "900";
 
 
+const SeConnecter = document.querySelector('.btn-connect-base');
+form.addEventListener('input', (e) => {
 
+    if (e.target.value.length > 0) {
+        SeConnecter.classList.replace('btn-connect-base', 'btn-connect');
+        SeConnecter.disabled = false;
+    } else {
+        SeConnecter.classList.replace('btn-connect', 'btn-connect-base');
+        SeConnecter.disabled = true;
+    }
+})

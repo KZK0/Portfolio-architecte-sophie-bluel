@@ -88,10 +88,21 @@ function displayGallery(pgallery, elm) {
                     }
 
                 }).then((result) => {
-                    console.log(result)
-                    result.json()
-                }).then(data => {
-                    window.location.reload()
+                    // console.log("mon element supprimé", data)
+                    fetch(url + "works", {
+                        method: "GET"
+                    }).then((result) => {
+                        return result.json()
+                    }).then(data => {
+                        gallery = data;
+                        galleryFilter = data;
+                        if (isConnected) {
+                            displayGallery(gallery, elemGallery)
+                            displayGallery(gallery, conteneurGalleryModal)
+                        } else {
+                            displayGallery(gallery, elemGallery)
+                        }
+                    })
                 })
             })
 
@@ -181,20 +192,34 @@ if (isConnected) {
         document.querySelector('.modal').style.display = 'none';
     }
 
+
+
     // ==============================================================================
     // ---------------- Ajouter un projet / Supprimer un projet ------------------
     // ==============================================================================
 
-    const addProject = document.getElementById('addProject');
-    const TitleModal = document.querySelector('.Title-project-modal');
-    const ValidButton = document.querySelector('.bottom-bloc-modal');
 
+    const addProject = document.createElement('button');
+    addProject.textContent = 'Ajouter une photo';
+    addProject.id = 'addProject';
+    const ContenerTitleModal = document.querySelector('.Title-project-modal');
+    const ValidButton = document.querySelector('.bottom-bloc-modal');
+    ValidButton.appendChild(addProject);
+
+    const TitleModal = document.createElement('h3');
+    TitleModal.textContent = 'Galerie Photo';
+    ContenerTitleModal.appendChild(TitleModal)
 
     addProject.addEventListener('click', (event) => {
-        TitleModal.innerHTML = '';
+        ContenerTitleModal.innerHTML = '';
         conteneurGalleryModal.innerHTML = '';
         ValidButton.innerHTML = '';
+        // ValidButton.appendChild(addProject);
         // Permet de vider le contenu de la modal au clique pour faire la seconde page 
+
+        const test2 = document.querySelectorAll('.Title-project-modal');
+        test2.innerHTML = '';
+
 
         conteneurGalleryModal.classList.replace('bloc-project-modal', 'bloc-project-modal-two');
         // Changement de class au clique d'ajout photo 
@@ -314,16 +339,23 @@ if (isConnected) {
                 }
 
             }).then(async (result) => {
-                console.log(result)
+
                 return result.json()
             }).then(data => {
-                window.location.reload()
+
+                gallery.push(data)
+                console.log("mes données", gallery)
+                displayGallery(gallery, elemGallery)
+
+
+                closeModale()
             })
         })
 
         // ------------------------------------------------------------------------------------
 
-        conteneurGalleryModal.appendChild(TitleModal)
+        conteneurGalleryModal.appendChild(ContenerTitleModal)
+        ContenerTitleModal.appendChild(TitleModal)
         conteneurGalleryModal.appendChild(imgDiv)
         conteneurGalleryModal.appendChild(TitreProjet)
         imgDiv.appendChild(imgModal)
@@ -349,18 +381,34 @@ if (isConnected) {
             ValidButton.classList.replace('bottom-bloc-modal-two', 'bottom-bloc-modal');
             ValidButton.innerHTML = '';
 
+            const test = document.querySelector('.Title-project-modal');
+            test.innerHTML = '';
+            console.log(document.querySelector('.Title-project-modal'));
+
+          
+            const sectTitle = document.createElement('div');
+            sectTitle.classList.add("Title-project-modal");
+
+            
+
+            const TitleModalb = document.createElement('h3');
+            TitleModalb.textContent = 'Galerie Photo';
+            sectTitle.appendChild(TitleModalb)
+            
+
+           
+
             arrow.style.display = 'none';
-            TitleModal.textContent = 'Galerie Photo';
+                 
+         
+            ContenerTitleModal.appendChild(TitleModal)
+            ValidButton.appendChild(addProject);
+           
 
-            const BoutonAjoutRetour = document.createElement('button');
-            BoutonAjoutRetour.textContent = 'Ajouter une photo';
-            BoutonAjoutRetour.classList.add('#addProject');
-
-
-            BlocModal.appendChild(TitleModal)
-            ValidButton.appendChild(BoutonAjoutRetour)
-
-            displayGallery(gallery, conteneurGalleryModal)
+             displayGallery(gallery, conteneurGalleryModal);
+            const blcModal = document.querySelector('.bloc-modal');
+            blcModal.insertBefore(sectTitle,blcModal.children[1])
+             
         })
 
     })

@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="../assets/styles/style.css">
+	<link rel="icon" href="../assets/icons/icons8-art-64.png">
 </head>
 <body>
 	<div class="gestion">
@@ -23,14 +24,16 @@
 			<nav  id="NavModal">
 				<i class="fa-solid fa-xmark fa-xl" id="Xmark"></i>
 			</nav>
-			<h3 class="Title-project-modal">Galerie Photo</h3>
+			<div class="Title-project-modal">
+				<!-- <h3>Galerie Photo</h3> -->
+			</div>
 			<div class="bloc-project-modal">
 				<!-- <button class="project-modal">
 					<i class="fa-solid fa-trash-can fa-sm"></i>
 				</button> -->
 			</div>
 			<div class="bottom-bloc-modal">
-				<button id="addProject">Ajouter une photo</button>
+				<!-- <button id="addProject">Ajouter une photo</button> -->
 			</div>
 		</div>
 	</div>
@@ -84,7 +87,7 @@
 			<input type="email" name="email" id="email">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
+			<input id="contact-submit" type="submit" value="Envoyer">
 		</form>
 	</section>
 </main>

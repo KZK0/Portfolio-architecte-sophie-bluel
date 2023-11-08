@@ -461,6 +461,45 @@ li:hover {
 	outline: 3px solid #B1663C;
 }
 
+#contact-submit {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+.btn-connect-base {
+	outline: none;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	transition: 0.4s ease;
+}
+
+.btn-connect {
+	outline: none;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+	transition: 0.4s ease;
+}
+
 .login label {
 	margin: 2em 0 1em 0;
 	font-weight: 600;
@@ -476,18 +515,6 @@ li:hover {
 	margin: auto;
 	color: #555554;
 	font-weight: 600;
-}
-
-input[type="submit"] {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin: 2em auto;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px;
-	cursor: pointer;
 }
 
 footer {
@@ -543,15 +570,6 @@ footer ul li {
 	background: white;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	border-radius: 20px;
-}
-
-.bloc-modal h3 {
-	color: black;
-	display: flex;
-	justify-content: center;
-	margin: 15px auto;
-	margin-top: 10px;
-	font-size: 2.5em;
 }
 
 .bloc-modal nav {
@@ -684,11 +702,6 @@ footer ul li {
 	transition: 0.3s ease;
 }
 
-.ValidateButton:hover {
-	cursor: pointer;
-	filter: brightness(0.9);
-}
-
 .ValidateButtonTwo:hover {
 	cursor: pointer;
 	filter: brightness(1.2);
@@ -762,6 +775,15 @@ footer ul li {
 
 .Title-project-modal {
 	margin: 0 auto;
+}
+
+.Title-project-modal h3 {
+	color: black;
+	display: flex;
+	justify-content: center;
+	margin: 15px auto;
+	margin-top: 10px;
+	font-size: 2.5em;
 }
 
 .formModal {
