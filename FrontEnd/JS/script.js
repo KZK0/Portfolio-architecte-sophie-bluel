@@ -217,9 +217,6 @@ if (isConnected) {
         // ValidButton.appendChild(addProject);
         // Permet de vider le contenu de la modal au clique pour faire la seconde page 
 
-        const test2 = document.querySelectorAll('.Title-project-modal');
-        test2.innerHTML = '';
-
 
         conteneurGalleryModal.classList.replace('bloc-project-modal', 'bloc-project-modal-two');
         // Changement de class au clique d'ajout photo 
@@ -380,23 +377,18 @@ if (isConnected) {
             conteneurGalleryModal.classList.replace('bloc-project-modal-two', 'bloc-project-modal');
             ValidButton.classList.replace('bottom-bloc-modal-two', 'bottom-bloc-modal');
             ValidButton.innerHTML = '';
-
-            const test = document.querySelector('.Title-project-modal');
-            test.innerHTML = '';
-            console.log(document.querySelector('.Title-project-modal'));
+            ContenerTitleModal.innerHTML = '';
+            console.log(ContenerTitleModal);
 
           
             const sectTitle = document.createElement('div');
             sectTitle.classList.add("Title-project-modal");
 
-            
 
             const TitleModalb = document.createElement('h3');
             TitleModalb.textContent = 'Galerie Photo';
             sectTitle.appendChild(TitleModalb)
             
-
-           
 
             arrow.style.display = 'none';
                  
@@ -405,7 +397,7 @@ if (isConnected) {
             ValidButton.appendChild(addProject);
            
 
-             displayGallery(gallery, conteneurGalleryModal);
+            displayGallery(gallery, conteneurGalleryModal);
             const blcModal = document.querySelector('.bloc-modal');
             blcModal.insertBefore(sectTitle,blcModal.children[1])
              
