@@ -1,2 +1,0 @@
-- Faire le retour de page dans la modal
-- Retour a la première page de la modal lorsqu'on upload un projet
