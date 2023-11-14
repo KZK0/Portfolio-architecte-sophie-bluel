@@ -77,7 +77,7 @@ function displayGallery(pgallery, elm) {
             bin.setAttribute('data-id', pgallery[i].id)
 
             binbackground.addEventListener('click', async (e) => {
-                // TODO faire la suppression côté serveur puis domHTML
+                // Suppression côté serveur puis domHTML
                 let idGallerie = e.target.getAttribute('data-id');
 
                 await fetch(url + "works/" + idGallerie, {
@@ -88,7 +88,6 @@ function displayGallery(pgallery, elm) {
                     }
 
                 }).then((result) => {
-                    // console.log("mon element supprimé", data)
                     fetch(url + "works", {
                         method: "GET"
                     }).then((result) => {
@@ -290,10 +289,8 @@ if (isConnected) {
 
             if (e.target.value.length > 0) {
                 ProjectButton.classList.replace('ValidateButton', 'ValidateButtonTwo');
-                ProjectButton.disabled = false;
             } else {
                 ProjectButton.classList.replace('ValidateButtonTwo', 'ValidateButton');
-                ProjectButton.disabled = true;
             }
         })
 
@@ -316,13 +313,17 @@ if (isConnected) {
             SelectCategorieModal.appendChild(CategorieModal)
         }
 
+        const errorLabel = document.createElement('label');
+        errorLabel.id = 'errorLabel';
+
         const ProjectButton = document.createElement('button');
         ValidButton.classList.replace('bottom-bloc-modal', 'bottom-bloc-modal-two');
         ProjectButton.textContent = 'Valider';
         ProjectButton.classList.add('ValidateButton');
 
         ProjectButton.addEventListener('click', async () => {
-            // TODO faire l'ajout' côté serveur puis domHTML
+            errorLabel.innerText = '';
+            // Ajout' côté serveur puis domHTML
             const formulaire = new FormData();
             formulaire.append('id', 0);
             formulaire.append('image', imgUpload);
@@ -330,7 +331,9 @@ if (isConnected) {
             formulaire.append('category', document.getElementById('Selection').options[document.getElementById('Selection').selectedIndex].getAttribute('data-id'));
 
 
-
+            if(imgUpload == null  || document.getElementById('TitreModal').value == null || document.getElementById('Selection').options[document.getElementById('Selection').selectedIndex].getAttribute('data-id') == null){
+                errorLabel.innerText='Tous les champs ne sont pas remplis';
+            }else{
             await fetch(url + "works", {
                 method: "POST",
                 body: formulaire,
@@ -340,10 +343,8 @@ if (isConnected) {
                 }
 
             }).then(async (result) => {
-
                 return result.json()
             }).then(data => {
-
                 gallery.push(data)
                 conteneurGalleryModal.classList.replace('bloc-project-modal-two', 'bloc-project-modal');
                 ValidButton.classList.replace('bottom-bloc-modal-two', 'bottom-bloc-modal');
@@ -374,9 +375,10 @@ if (isConnected) {
                 console.log("mes données", gallery)
                 displayGallery(gallery, elemGallery)
 
-
                 closeModale()
+                
             })
+        }
         })
 
         // ------------------------------------------------------------------------------------
@@ -393,9 +395,10 @@ if (isConnected) {
         TitreProjet.appendChild(InputModal)
         TitreProjet.appendChild(LabelSelectCategorie)
         TitreProjet.appendChild(SelectCategorieModal)
+        ValidButton.appendChild(errorLabel)
         ValidButton.appendChild(ProjectButton)
 
-        //TODO : ici ajouter la fleche de retour, ne pas oublier de mettre l'event sur la fleche
+
         const contenerArrow = document.querySelector('#NavModal');
         const arrow = document.createElement('i');
         arrow.classList.add('fa-solid')
