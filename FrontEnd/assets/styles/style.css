@@ -349,6 +349,11 @@ li:hover {
 	cursor: pointer;
 }
 
+.filtre-Selected {
+	background: #1D6154;
+	color: white;
+}
+
 .gallery {
 	width: 100%;
 	max-width: 860px;
